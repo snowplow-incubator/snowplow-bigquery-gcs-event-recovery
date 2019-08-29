@@ -14,14 +14,8 @@ import sbt._
 
 object Dependencies {
   object V {
-    // Scala Snowplow
-    val analyticsSdk       = "0.4.0"
     // Scala
-    val cats               = "1.4.0"
-    val catsEffect         = "1.0.0"
     val circe              = "0.11.1"
-    val decline            = "0.5.1"
-    val fs2                = "1.0.0"
     val scio               = "0.7.4"
     // Java
     val beam               = "2.11.0"
@@ -40,18 +34,11 @@ object Dependencies {
   val pubsub             = "com.google.cloud"      %  "google-cloud-pubsub"          % V.googleCloud
 
   // Scala
-  val analyticsSdk       = "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % V.analyticsSdk
-
-  val cats               = "org.typelevel"         %% "cats-core"                    % V.cats
-  val catsEffect         = "org.typelevel"         %% "cats-effect"                  % V.catsEffect
   val circe              = "io.circe"              %% "circe-core"                   % V.circe
   val circeGeneric       = "io.circe"              %% "circe-generic"                % V.circe
   val circeJavaTime      = "io.circe"              %% "circe-java8"                  % V.circe
   val circeParser        = "io.circe"              %% "circe-parser"                 % V.circe
-  val decline            = "com.monovore"          %% "decline"                      % V.decline
-  val fs2                = "co.fs2"                %% "fs2-core"                     % V.fs2
   val scioCore           = "com.spotify"           %% "scio-core"                    % V.scio
-  val scioRepl           = "com.spotify"           %% "scio-repl"                    % V.scio
 
   // Java
   val dataflowRunner     = "org.apache.beam"       % "beam-runners-google-cloud-dataflow-java" % V.beam
