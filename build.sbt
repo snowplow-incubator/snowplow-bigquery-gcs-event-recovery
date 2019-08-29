@@ -1,9 +1,11 @@
 lazy val root = project.in(file("."))
   .settings(Seq(
-    name := "gcs-to-pubsub",
+    name := "snowplow-bigquery-gcs-event-recovery",
     description := "Job to sink data from GCS to PubSub",
     buildInfoPackage := "com.snowplowanalytics.gcstopubsub.generated"
   ))
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
   .settings(BuildSettings.dockerSettings)
   .settings(
     BuildSettings.commonSettings,

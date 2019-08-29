@@ -1,0 +1,25 @@
+language: scala
+scala: 2.11.12
+jdk: openjdk8
+jobs:
+  include:
+  - if: tag IS present
+  exclude:
+  - if: tag IS blank
+services:
+  - docker
+before_install:
+  - bash ./.travis/checkTag.sh $TRAVIS_TAG
+  #- docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+#deploy:
+#  on:
+#    tags: true
+#  skip_cleanup: true
+#  provider: script
+#  script: sbt docker:publish
+env:
+  global:
+  # DOCKER_USERNAME
+  - secure:
+  # DOCKER_PASSWORD
+  - secure:
