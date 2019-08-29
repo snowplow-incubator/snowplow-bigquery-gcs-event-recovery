@@ -1,14 +1,23 @@
 # Snowplow BigQuery GCS Event Recovery
 
+Snowplow BigQuery GCS Event Recovery reads bad rows from [GCS](https://cloud.google.com/storage/) and writes it to given [PubSub](https://cloud.google.com/pubsub/) topic.
+
 ## Quickstart
 
-Assuming git and [SBT][sbt] installed:
+Snowplow BigQuery GCS Event Recovery is hosted on Docker Hub : [snowplow/snowplow-bigquery-gcs-event-recovery](https://cloud.docker.com/u/snowplow/repository/docker/snowplow/snowplow-bigquery-gcs-event-recovery/general).
 
 ```bash
-$ git clone https://github.com/snowplow-incubator/snowplow-bigquery-gcs-event-recovery
-$ cd snowplow-bigquery-gcs-event-recovery
-$ GOOGLE_APPLICATION_CREDENTIALS=$PATH_TO_CREDS sbt
-sbt$ run --input=gs://bucket/sampledata/newsample.txt --output=projects/snowplow-project/topics/dataflow-recovery --runner=DataflowRunner --project=snowplow-project
+# Put GOOGLE_APPLICATION_CREDENTIALS json file to DOCKER_CONFIG_FOLDER
+$ export DOCKER_CONFIG_FOLDER=<path-to-docker-config-folder>
+$ export GOOGLE_APPLICATION_CREDENTIALS = $DOCKER_CONFIG_FOLDER/<creds-json-file>
+$ docker run \
+  -v $DOCKER_CONFIG_FOLDER:/snowplow/config \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/$GOOGLE_APPLICATION_CREDENTIALS \
+  snowplow/snowplow-bigquery-gcs-event-recovery:0.1.0 \
+  --input=gs://bucket/sampledata/newsample.txt \
+  --output=projects/snowplow-project/topics/dataflow-recovery \
+  --runner=DataflowRunner \
+  --project=snowplow-project
 ```
 
 ## Copyright and license
@@ -27,4 +36,3 @@ limitations under the License.
 [snowplow]: https://github.com/snowplow/snowplow/
 [sbt]: https://www.scala-sbt.org/
 [license]: http://www.apache.org/licenses/LICENSE-2.0
-
