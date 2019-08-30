@@ -12,7 +12,7 @@
  */
 import sbt._
 import Keys._
-import com.typesafe.sbt.packager.Keys.{packageName, maintainer, daemonUser}
+import com.typesafe.sbt.packager.Keys.{packageName, maintainer, daemonUser ,daemonUserUid, defaultLinuxInstallLocation}
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport._
 import sbtbuildinfo._
 import sbtbuildinfo.BuildInfoKeys._
@@ -49,6 +49,8 @@ object BuildSettings {
     maintainer in Docker := "Snowplow Analytics Ltd. <support@snowplowanalytics.com>",
     dockerBaseImage := "snowplow-docker-registry.bintray.io/snowplow/base-debian:0.1.0",
     daemonUser in Docker := "snowplow",
+    daemonUserUid in Docker := None,
+    defaultLinuxInstallLocation in Docker := "/home/snowplow",
     dockerUpdateLatest := true
   )
 }
