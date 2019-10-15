@@ -17,7 +17,8 @@ import com.spotify.scio.ScioContext
 object Job {
 
   def run(sc: ScioContext, input: String, output: String): Unit = {
-    sc.textFile(input)
+    val source = if (input.startsWith("gcs://")) sc.textFile(input) else sc.pubsubSubscription[String](input)
+    source
       .map(BadRow.parse)
       .map(_.getTsv)
       .map(_.replaceAll("\n$", ""))

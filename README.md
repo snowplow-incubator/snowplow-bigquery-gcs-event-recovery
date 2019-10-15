@@ -20,6 +20,17 @@ $ docker run \
   --project=snowplow-project
 ```
 
+---
+
+Pubsub <> Pubsub via sbt:
+
+```bash
+$ git clone https://github.com/chuwy/gcs-to-pubsub
+$ cd gcs-to-pubsub
+$ GOOGLE_APPLICATION_CREDENTIALS=$PATH_TO_CREDS sbt
+sbt$ run --input=projects/snowplow-project/subscriptions/bad_data_subscription --output=projects/snowplow-project/topics/dataflow-recovery --runner=DataflowRunner --project=snowplow-project
+```
+
 ## Copyright and license
 
 Snowplow BigQuery GCS Event Recovery is copyright 2019 Snowplow Analytics Ltd.
