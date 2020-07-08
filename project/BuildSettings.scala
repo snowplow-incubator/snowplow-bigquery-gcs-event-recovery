@@ -22,7 +22,7 @@ object BuildSettings {
   lazy val commonSettings = Seq(
     organization          := "com.snowplowanalytics",
     version               := "0.1.0",
-    scalaVersion          := "2.11.12",
+    scalaVersion          := "2.12.11",
     scalacOptions         ++= Seq("-target:jvm-1.8",
       "-deprecation",
       "-feature",
@@ -40,8 +40,7 @@ object BuildSettings {
   )
 
   lazy val macroSettings = Seq(
-    libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-    addCompilerPlugin("org.scalamacros" % "paradise" % Dependencies.V.scalaMacrosVersion cross CrossVersion.full)
+    libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
   )
 
   lazy val dockerSettings = Seq(

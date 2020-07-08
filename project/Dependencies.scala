@@ -16,10 +16,10 @@ object Dependencies {
   object V {
     // Scala
     val circe              = "0.11.1"
-    val scio               = "0.7.4"
+    val scio               = "0.9.2"
     // Java
-    val beam               = "2.11.0"
-    val googleCloud        = "1.51.0"
+    val beam               = "2.22.0"
+    val googleCloud        = "1.85.1"
     val slf4j              = "1.7.25"
     // Scala (test only)
     val specs2             = "4.3.5"
