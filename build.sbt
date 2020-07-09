@@ -26,7 +26,6 @@ lazy val root = project.in(file("."))
     libraryDependencies ++= Seq(
       Dependencies.circe,
       Dependencies.circeGeneric,
-      Dependencies.circeJavaTime,
       Dependencies.circeParser,
 
       Dependencies.scioCore,
