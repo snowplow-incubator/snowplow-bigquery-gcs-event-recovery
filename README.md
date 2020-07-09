@@ -13,11 +13,12 @@ $ export GOOGLE_APPLICATION_CREDENTIALS = $DOCKER_CONFIG_FOLDER/<creds-json-file
 $ docker run \
   -v $DOCKER_CONFIG_FOLDER:/snowplow/config \
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/$GOOGLE_APPLICATION_CREDENTIALS \
-  snowplow/snowplow-bigquery-gcs-event-recovery:0.1.0 \
+  snowplow/snowplow-bigquery-gcs-event-recovery:0.2.0 \
   --input=gs://bucket/sampledata/newsample.txt \
   --output=projects/snowplow-project/topics/dataflow-recovery \
   --runner=DataflowRunner \
-  --project=snowplow-project
+  --project=snowplow-project \
+  --recovery=legacy     # optional parameter that also can be refr-device-tstamp
 ```
 
 ## Copyright and license
