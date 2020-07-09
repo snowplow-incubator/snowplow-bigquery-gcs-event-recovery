@@ -15,11 +15,17 @@ package com.snowplowanalytics.gcstopubsub
 import com.spotify.scio._
 
 object Main {
+
   def main(cmdlineArgs: Array[String]): Unit = {
     val (sc, args) = ContextAndArgs(cmdlineArgs)
+    val recovery = args.optional("recovery") match {
+      case Some("refr-device-tstamp") => Recovery.RefrDeviceTstamp
+      case Some("legacy") => Recovery.Legacy
+      case None => Recovery.Legacy
+      case Some(other) => throw new IllegalArgumentException(s"$other is invalid recovery scenario")
+    }
     val input = args("input")
     val output = args("output")
-    Job.run(sc, input, output)
-    val _ = sc.close()
+    Job.run(sc, input, output, recovery)
   }
 }

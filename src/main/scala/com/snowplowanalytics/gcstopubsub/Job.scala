@@ -15,12 +15,19 @@ package com.snowplowanalytics.gcstopubsub
 import com.spotify.scio.ScioContext
 
 object Job {
+  def run(sc: ScioContext, input: String, output: String, recovery: Recovery): Unit = {
+    val transformation: String => List[String] = recovery match {
+      case Recovery.Legacy =>
+        s => List(BadRow.parse(s).getTsv.replaceAll("\n$", ""))
+      case Recovery.RefrDeviceTstamp =>
+        s => RepeaterFailure.parse(s) match {
+          case Right(repeaterFailure) if repeaterFailure.isRefrDeviceTstamp =>
+            List(repeaterFailure.fixRefDeviceTstamp.noSpaces)
+          case _ =>
+            Nil
+        }
+    }
 
-  def run(sc: ScioContext, input: String, output: String): Unit = {
-    sc.textFile(input)
-      .map(BadRow.parse)
-      .map(_.getTsv)
-      .map(_.replaceAll("\n$", ""))
-      .saveAsPubsub(output)
+    sc.textFile(input).flatMap(transformation).saveAsPubsub(output)
   }
 }

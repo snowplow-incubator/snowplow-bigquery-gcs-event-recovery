@@ -15,11 +15,11 @@ import sbt._
 object Dependencies {
   object V {
     // Scala
-    val circe              = "0.11.1"
-    val scio               = "0.7.4"
+    val circe              = "0.13.0"
+    val scio               = "0.9.2"
     // Java
-    val beam               = "2.11.0"
-    val googleCloud        = "1.51.0"
+    val beam               = "2.22.0"
+    val googleCloud        = "1.85.1"
     val slf4j              = "1.7.25"
     // Scala (test only)
     val specs2             = "4.3.5"
@@ -36,7 +36,6 @@ object Dependencies {
   // Scala
   val circe              = "io.circe"              %% "circe-core"                   % V.circe
   val circeGeneric       = "io.circe"              %% "circe-generic"                % V.circe
-  val circeJavaTime      = "io.circe"              %% "circe-java8"                  % V.circe
   val circeParser        = "io.circe"              %% "circe-parser"                 % V.circe
   val scioCore           = "com.spotify"           %% "scio-core"                    % V.scio
 
