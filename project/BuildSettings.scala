@@ -22,26 +22,21 @@ object BuildSettings {
   lazy val commonSettings = Seq(
     organization          := "com.snowplowanalytics",
     version               := "0.1.0",
-    scalaVersion          := "2.11.12",
+    scalaVersion          := "2.13.11",
     scalacOptions         ++= Seq("-target:jvm-1.8",
       "-deprecation",
       "-feature",
-      "-unchecked"),
+      "-unchecked",
+      "-Ymacro-annotations"),
     javacOptions          ++= Seq("-source", "1.8", "-target", "1.8"),
-    resolvers             += "Snowplow Bintray" at "https://snowplow.bintray.com/snowplow-maven/",
     Global / cancelable   := true,
 
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % Dependencies.V.betterMonadicFor),
-    addCompilerPlugin("org.spire-math" %% "kind-projector" % Dependencies.V.kindProjector),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % Dependencies.V.kindProjector),
 
     buildInfoKeys := Seq[BuildInfoKey](organization, name, version, description,
       BuildInfoKey.action("userAgent") { s"${name.value}/${version.value}" }
     )
-  )
-
-  lazy val macroSettings = Seq(
-    libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-    addCompilerPlugin("org.scalamacros" % "paradise" % Dependencies.V.scalaMacrosVersion cross CrossVersion.full)
   )
 
   lazy val dockerSettings = Seq(
