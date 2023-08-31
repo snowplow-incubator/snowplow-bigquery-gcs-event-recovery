@@ -1,3 +1,8 @@
+Version 0.2.0 (2023-08-31)
+--------------------------
+Update project to work with snowplow-badrows module (#7)
+Update docker build infrastructure (#8)
+
 Version 0.1.0 (2019-x-x)
 --------------------------
 Initial release
