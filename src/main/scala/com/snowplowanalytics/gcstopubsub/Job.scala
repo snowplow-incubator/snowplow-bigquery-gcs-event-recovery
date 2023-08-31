@@ -13,14 +13,29 @@
 package com.snowplowanalytics.gcstopubsub
 
 import com.spotify.scio.ScioContext
+import com.spotify.scio.coders._
+import com.spotify.scio.pubsub._
+import com.spotify.scio.values._
+
+import io.circe.parser.decode
+import io.circe.generic.semiauto.deriveDecoder
+
+import com.snowplowanalytics.snowplow.badrows._
+import com.snowplowanalytics.snowplow.badrows.BadRow._
+import com.snowplowanalytics.iglu.core.SelfDescribingData
+import com.snowplowanalytics.iglu.core.circe.implicits._
 
 object Job {
+  implicit val sdjLoaderParsingErr =
+    deriveDecoder[SelfDescribingData[BadRow.LoaderParsingError]]
 
   def run(sc: ScioContext, input: String, output: String): Unit = {
     sc.textFile(input)
-      .map(BadRow.parse)
-      .map(_.getTsv)
-      .map(_.replaceAll("\n$", ""))
-      .saveAsPubsub(output)
+      .map(decode[SelfDescribingData[BadRow.LoaderParsingError]])
+      .map(_.toOption)
+      .collect { case Some(SelfDescribingData(_, err: BadRow.LoaderParsingError)) =>
+        err.payload.event
+      }
+      .write(PubsubIO.string(output))(PubsubIO.WriteParam())
   }
 }

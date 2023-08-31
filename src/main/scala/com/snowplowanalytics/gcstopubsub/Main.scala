@@ -20,6 +20,7 @@ object Main {
     val input = args("input")
     val output = args("output")
     Job.run(sc, input, output)
-    val _ = sc.close()
+    sc.run()
+    ()
   }
 }

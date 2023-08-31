@@ -22,14 +22,15 @@ lazy val root = project.in(file("."))
   .settings(BuildSettings.dockerSettings)
   .settings(
     BuildSettings.commonSettings,
-    BuildSettings.macroSettings,
     libraryDependencies ++= Seq(
       Dependencies.circe,
       Dependencies.circeGeneric,
-      Dependencies.circeJavaTime,
       Dependencies.circeParser,
 
+      Dependencies.badrows,
+
       Dependencies.scioCore,
+      Dependencies.scioPubsub,
 
       Dependencies.slf4j,
       Dependencies.directRunner,
