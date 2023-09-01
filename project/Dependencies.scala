@@ -20,8 +20,8 @@ object Dependencies {
     // Scala Snowplow
     val badrows            = "2.2.1"
     // Java
-    val beam               = "2.11.0"
-    val googleCloud        = "1.51.0"
+    val beam               = "2.49.0"
+    val googleCloud        = "2.31.1"
     val slf4j              = "1.7.25"
     // Scala (test only)
     val specs2             = "4.20.2"

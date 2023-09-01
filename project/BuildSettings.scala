@@ -30,6 +30,7 @@ object BuildSettings {
       "-Ymacro-annotations"),
     javacOptions          ++= Seq("-source", "1.8", "-target", "1.8"),
     Global / cancelable   := true,
+    resolvers += "Confluent" at "https://packages.confluent.io/maven/",
 
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % Dependencies.V.betterMonadicFor),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % Dependencies.V.kindProjector),
@@ -42,7 +43,7 @@ object BuildSettings {
   lazy val dockerSettings = Seq(
     packageName in Docker := "snowplow/snowplow-bigquery-gcs-event-recovery",
     maintainer in Docker := "Snowplow Analytics Ltd. <support@snowplowanalytics.com>",
-    dockerBaseImage := "snowplow-docker-registry.bintray.io/snowplow/base-debian:0.1.0",
+    dockerBaseImage := "snowplow/base-debian:0.1.0",
     daemonUser in Docker := "snowplow",
     daemonUserUid in Docker := None,
     defaultLinuxInstallLocation in Docker := "/home/snowplow",
