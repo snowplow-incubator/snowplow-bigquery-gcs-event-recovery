@@ -18,7 +18,7 @@ lazy val root = project.in(file("."))
     buildInfoPackage := "com.snowplowanalytics.gcstopubsub.generated"
   ))
   .enablePlugins(JavaAppPackaging)
-  .enablePlugins(DockerPlugin)
+  .enablePlugins(SnowplowDockerPlugin)
   .settings(BuildSettings.dockerSettings)
   .settings(
     BuildSettings.commonSettings,
